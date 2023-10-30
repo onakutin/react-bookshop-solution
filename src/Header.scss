@@ -1,0 +1,9 @@
+.header {
+    border: 1px solid #fff;
+    padding: 1em;
+    display: flex;
+
+    &__shop-name {
+      text-align: left;
+    }
+}
