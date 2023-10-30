@@ -1,12 +1,20 @@
 import { useState } from "react"
 import './TopMenu.scss';
 
-export default function TopMenu({ currentItem }) {
+export default function TopMenu({
+    currentPage,
+    setCurrentPage,
+    currentItem
+}) {
 
     const [open, setOpen] = useState(false);
 
     const toggleMenu = () => {
         setOpen( !open );
+    }
+
+    const handleItemClick = (page) => {
+        setCurrentPage(page);
     }
 
     return (
@@ -15,20 +23,23 @@ export default function TopMenu({ currentItem }) {
                 open ? (
                         <nav className="topmenu">
                             <a
-                                className={ `link` + (currentItem === '' ? ' link--highlighted' : '') }
+                                className={ `link` + (currentPage === '' ? ' link--highlighted' : '') }
                                 href="#"
+                                onClick={ () => handleItemClick('') }
                             >
                                 Home
                             </a>
                             <a
-                                className={ `link` + (currentItem === 'about' ? ' link--highlighted' : '') }
+                                className={ `link` + (currentPage === 'about' ? ' link--highlighted' : '') }
                                 href="#about"
+                                onClick={ () => handleItemClick('about') }
                             >
                                 About us
                             </a>
                             <a
-                                className={ `link` + (currentItem === 'contact' ? ' link--highlighted' : '') }
+                                className={ `link` + (currentPage === 'contact' ? ' link--highlighted' : '') }
                                 href="#contact"
+                                onClick={ () => handleItemClick('contact') }
                             >
                                 Contact
                             </a>
