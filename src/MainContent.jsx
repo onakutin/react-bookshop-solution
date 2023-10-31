@@ -1,11 +1,18 @@
+import { useContext } from "react"
+import CurrencyContext from "./CurrencyContext"
+
+
 export default function MainContent({ currentPage }) {
+
+    const { currency } = useContext(CurrencyContext);
+
     return (
         <>
             <h1 className="app__headline">Flourish and Blotts</h1>
 
             {
                 currentPage === ''
-                    ? <h2>Welcome!!</h2>
+                    ? <h2>Welcome!! { currency }</h2>
                     : ''
             }
 

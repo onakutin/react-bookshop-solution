@@ -1,25 +1,50 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import './App.scss'
 import Header from './Header';
 import MainContent from './MainContent';
+import CurrencyContext from './CurrencyContext';
+import context from './Context';
+import reducer from './reducer';
 
 
 export default function App() {
 
   const [currentPage, setCurrentPage] = useState('');
+  const [currency, setCurrency] = useState('EUR');
+
+
+  const [contextValue, setContextValue] = useReducer(reducer, {
+    user: null,
+    theme: 'light',
+    language: 'en',
+    currency: 'USD',
+    authHash: null,
+    shoppingCart: []
+  })
 
   return (
-    <div className="app">
+    <context.Provider value={ { state: contextValue, dispatch: setContextValue } }>
+      <CurrencyContext.Provider value={
+        {
+          currency,
+          setCurrency
+        }
+      }>
 
-        <Header
-          currentPage={ currentPage }
-          setCurrentPage={ setCurrentPage }
-        />
+        <div className="app">
 
-        <MainContent
-          currentPage={ currentPage }
-        />
-    </div>
+            <Header
+              currentPage={ currentPage }
+              setCurrentPage={ setCurrentPage }
+            />
+
+            <MainContent
+              currentPage={ currentPage }
+            />
+        </div>
+
+      </CurrencyContext.Provider>
+    </context.Provider>
   )
 }
 
