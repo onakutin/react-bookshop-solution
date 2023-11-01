@@ -4,6 +4,7 @@ import './Header.scss';
 import SearchBox from './SearchBox';
 import TopMenu from './TopMenu';
 import context from './Context';
+import { Route, Routes } from 'react-router-dom';
 
 export default function Header({ currentPage, setCurrentPage }) {
 
@@ -26,7 +27,10 @@ export default function Header({ currentPage, setCurrentPage }) {
         <header className="header">
             <div className="header__shop-name">Flourish & Blotts</div>
 
-            <SearchBox value={ value } setValue={ setValue } />
+            <Routes>
+                <Route path="/about-us" element={ <SearchBox value={ value } setValue={ setValue } /> } />
+                <Route path="*" element="" />
+            </Routes>
 
             <CurrencySelection />
 

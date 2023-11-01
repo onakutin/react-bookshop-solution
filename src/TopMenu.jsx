@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './TopMenu.scss';
+import { Link, useLocation } from "react-router-dom";
 
 export default function TopMenu({
     currentPage,
@@ -17,32 +18,39 @@ export default function TopMenu({
         setCurrentPage(page);
     }
 
+    const location = useLocation();
+    console.log(location);
+    //  pathname  search       hash
+    //  /books   ?name=hello  #bottom
+
     return (
         <>
             {
                 open ? (
                         <nav className="topmenu">
-                            <a
-                                className={ `link` + (currentPage === '' ? ' link--highlighted' : '') }
-                                href="#"
-                                onClick={ () => handleItemClick('') }
+                            <Link
+                                className={ `link` + (location.pathname === '/' ? ' link--highlighted' : '') }
+                                to="/"
                             >
                                 Home
-                            </a>
-                            <a
-                                className={ `link` + (currentPage === 'about' ? ' link--highlighted' : '') }
-                                href="#about"
-                                onClick={ () => handleItemClick('about') }
+                            </Link>
+
+                            <Link
+                                className={ `link` + (location === '/about-us' ? ' link--highlighted' : '') }
+                                to="/about-us"
                             >
                                 About us
-                            </a>
-                            <a
-                                className={ `link` + (currentPage === 'contact' ? ' link--highlighted' : '') }
-                                href="#contact"
-                                onClick={ () => handleItemClick('contact') }
+                            </Link>
+
+                            <Link
+                                className={ `link` + (location === '/contact-us' ? ' link--highlighted' : '') }
+                                to="/contact-us"
                             >
                                 Contact
-                            </a>
+                            </Link>
+
+                            <Link to="/books">Books</Link>
+
                         </nav>
                     )
                     : ''

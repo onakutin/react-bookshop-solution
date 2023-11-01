@@ -1,5 +1,11 @@
 import { useContext } from "react"
 import CurrencyContext from "./CurrencyContext"
+import Homepage from "./Homepage";
+import { Route, Routes } from "react-router-dom";
+import AboutUs from "./AboutUs";
+import Contact from "./Contact";
+import BookDetail from "./BookDetail";
+import SubpageLayout from "./SubpageLayout";
 
 
 export default function MainContent({ currentPage }) {
@@ -10,23 +16,16 @@ export default function MainContent({ currentPage }) {
         <>
             <h1 className="app__headline">Flourish and Blotts</h1>
 
-            {
-                currentPage === ''
-                    ? <h2>Welcome!! { currency }</h2>
-                    : ''
-            }
+            <Routes>
+                <Route path="/" element={ <Homepage /> } />
 
-            {
-                currentPage === 'about'
-                    ? <h2>About us</h2>
-                    : ''
-            }
-
-            {
-                currentPage === 'contact'
-                    ? <h2>Contact form</h2>
-                    : ''
-            }
+                <Route path="/" element={ <SubpageLayout /> }>
+                    <Route path="/about-us" element={ <AboutUs /> } />
+                    <Route path="/contact-us" element={ <Contact /> } />
+                    <Route path="/book/:id" element={ <BookDetail /> } />
+                    <Route path="*" element="404: page not found" />
+                </Route>
+            </Routes>
         </>
     )
 }
